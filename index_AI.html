@@ -15,19 +15,19 @@
 <body>
 <div class="container" id="cv">
     <div class="side">
-        <div class="me">
-            <div class="portrait"></div>
-            <div class="remodal remodal-img" data-remodal-id="portrait-modal">
-                <h3>请输入图片URL地址：</h3>
-                <br/>
-                <input type="text" id="avatar-url">
-                <button data-remodal-action="confirm" class="remodal-confirm">确定</button>
-            </div>
+	<div class="me">
+		<div class="portrait"></div>
+		<div class="remodal remodal-img" data-remodal-id="portrait-modal">
+			<h3>请输入图片URL地址：</h3>
+			<br/>
+			<input type="text" id="avatar-url">
+			<button data-remodal-action="confirm" class="remodal-confirm">确定</button>
+		</div>
 
-				<b><h1 id="persona-tag">意向职位：Java研发</h1>
-				<h2 id="username">仪志鑫</h2></b>
-        </div>
-        <div class="profile info-unit">
+		<b><h1 id="persona-tag">意向职位：AI研发</h1>
+		<h2 id="username">仪志鑫</h2></b>
+	</div>
+	<div class="profile info-unit">
             <h2 class="info-header"><i class="iconfont icon-person"></i> <span class="info-title">基本信息</span></h2>
             <hr>
             <ul class="info-list">
@@ -41,7 +41,7 @@
                 <li>
                     <label class="left-label">院校</label><span class="label-value">哈尔滨理工大学</span></li>
                 <li>
-                    <label class="left-label">专业</label><span class="label-value">计算机科学与技术</span></li>
+                    <label class="left-label">专业</label><span class="label-value" style="font-weight: bold;">计算机科学与技术</span></li>
             </ul>
         </div>
 		        <div class="stack info-unit">
@@ -50,13 +50,17 @@
             <ul class="stack-list">
                 <b>
                     <li>
-                        <label class="left-label" title="前-后端">工程</label><span class="label-value">Ajax/jQuery/Vue2 - SpringMVC/SpringBoot</span>
-                    </li>
-					<li>
                         <label class="left-label" title="人工智能">模型训练</label><span class="label-value">监督/强化/蒸馏</span>
                     </li>
                     <li>
-                          <label class="left-label" title="数据库">数据库</label><span class="label-value" font-size="10px" >Redis/Mysql等/PGsql等</span>
+                        <label class="left-label" title="语言">工程</label><span
+                            class="label-value">二开Dify及多个落地项目</span>
+                    </li>
+                 <!--   <li>
+                        <label class="left-label" title="前-后端">前 - 后端</label><span class="label-value">next.js/Flask</span>
+                    </li> -->
+                    <li>
+                        <label class="left-label" title="数据库">数据库</label><span class="label-value" font-size="10px" >Redis/Mysql等/PGsql等</span>
                     </li>
                     <li>
                         <label class="left-label" title="中间件">中间件</label><span class="label-value">Nginx/MQ/K8S/Docker等</span>
@@ -95,22 +99,21 @@
                     <label class="left-label">手机</label><span class="label-value"><b>17864090611</b></span></li>
                 <li>
                     <label class="left-label">邮箱</label><span class="label-value"><b>new961102@163.com</b></span></li>
-                 <li>
+                <li>
                     <label class="left-label">Github</label>
 						 <a href='https://github.com/201512130144' style="color:green;" target="_blank">
                             <b>hey，God</b>
                         </a>
-					</li>	
+					</li>
             </ul>
         </div>
-				 <div class="comment info-unit">
+		 <div class="comment info-unit">
 		  <h2 class="info-header"><i class="iconfont icon-flower"></i> <span class="info-title">自我评价</span></h2>
             <hr>
             <p>
                  <b>注重动手能力，理论联系实践，兴趣驱使技术 </b>，遵循以人为本的敏捷开发。
             </p>
 		</div>
-		
         <!--   <div class="remodal remodal-img" data-remodal-id="weixin-modal">
                <h3>请输入图片URL地址：</h3>
                <br/>
@@ -119,7 +122,7 @@
            </div> -->
     </div>
     <div class="main">
-       <div class="education info-unit right-list">
+        <div class="education info-unit right-list">
 			<div class="header">
 		
             <h2 class="info-header"><i class="iconfont icon-education"></i> <span class="info-title">教育经历</span>
@@ -161,7 +164,7 @@
         <div class="work info-unit right-list">
             <h2 class="info-header"><i class="iconfont icon-work"></i> <span class="info-title">成果</span></h2>
             <hr>
-                   <ul class="experience-list">
+            <ul class="experience-list">
 			    <li>
                     <h4><b>软著（2024SR0954862，声纹欺诈识别系统V1.0）</b></h4>
                     <p>
@@ -194,21 +197,7 @@
             <h2 class="info-header"><i class="iconfont icon-project"></i> <span class="info-title">项目经历</span></h2>
             <hr>
             <ul class="experience-list">
-                <li>
-                    <h3><b>医疗耗材 - SpringBoot</b></h3>
-                    <p>为了开发具有可用性、性能、安全性，并实现医药分离、零差价和精细化管理，故推出<b>SPD</b>平台。该平台三端通过MQ进行通信，具体如下：
-                        <b>Supply端</b>，以Redis缓存进行耗材/药品信息维护，减少IO；<b>Process端</b>，系统以Nginx处理静态资源，Tomcat处理动态资源，
-                        并加盐对耗材/药品产生唯一码，使用订阅发布来保证实时性，使用日志异步持久化到Oracle；<b>Distribution端</b>，耗材/药品实时消耗采用消费者发送异步消息，
-                        不足则微信、短信进行预警。最后为Supply<b>提供接口</b>，为多个供应商提供支持。
-                    </p>
-                </li>
-                <li>
-                    <h3><b>财务一体化 - SpringMvc</b></h3>
-                    <p>导入导出平台对<b>EasyExcel</b>技术进行百万级别数据的导出（30s）进行优化，
-                        分批读取+JDBC分批插入+批量事务操作来实现百万数据的流式导入<b>（5s）</b>，同时采用自定义注解来对工作流财务报销、项目申报等模块进行开发及个性化需求维护。
-                    </p>
-                </li>
-				  <li>
+			    <li>
                     <h4><b>Agent/工作流/Chat - Dify二次开发</b></h4>
                     <p>
 					<b>设计Prompt+Celery+RabbitMQ+Redis的微服务异步任务治理体系</b>。通过RabbitMQ的优先级队列、死信队列等高级特性，
@@ -225,13 +214,27 @@
 					</p>
                 </li>
                 <li>
-                    <h3><b>电子商务支付 - SpringCloud</b></h3>
-                    <p>为了整合<b>一码多联</b>，故推出支付平台，年交易量达到<b>2亿</b>。对应多个第三方支付接口（微信/支付宝/银联），熟悉支付结算、风控体系等核心模块，具体
+                    <h4><b>分布式SPD - SpringBoot</b></h4>
+                    <p>针对多个三甲医院的物资/耗材，设计具有可用性、性能、安全性，并实现医药分离、零差价和精细化，推出<b>SPD</b>平台。该平台三端通过RabbitMQ进行通信，具体如下：
+                        <b>Supply端</b>，以Redis缓存耗材/药品信息，减少大批量的IO；<b>Process端</b>，系统以Nginx处理静态资源，Tomcat处理动态资源，
+                        并加盐对耗材/药品产生唯一码，使用订阅发布来保证实时性，使用日志异步持久化到Oracle；<b>Distribution端</b>，耗材/药品实时消耗采用广播，
+                        不足则通过微信、短信预警。Supply端<b>提供Json格式接口</b>，为多个供应商提供支持。
+                    </p>
+                </li>
+                <li>
+                    <h4><b>历史数据导入/导出 - SpringMvc</b></h4>
+                    <p>针对某高校的导入导出财务平台，采用<b>EasyExcel</b>技术进行百万级别数据的导出（30s）进行优化，
+                        分批（硬盘存储块大小）读取+JDBC分批插入+批量事务操作来实现百万数据的流式导入<b>（5s）</b>，同时采用<b>自定义注解来对工作流财务报销、项目申报等模块进行开发及个性化需求维护</b>。
+                    </p>
+                </li>
+                <li>
+                    <h4><b>电子商务支付 - SpringCloud</b></h4>
+                    <p>针对小商户群体的支付业务，整合<b>一码（QR码）多联</b>，故推出支付平台，年交易量达到<b>2亿</b>。统一管理第三方支付接口（微信/支付宝/银联），平台<b>具备支付结算、风控体系</b>等核心模块，具体
                         Nginx（过滤非法请求）、Redis（支付流水缓存）、RocketMQ（交易异步通知）、ElasticSearch（交易日志分析）。
                     </p>
                 </li>
-               <li>
-                    <h3>小型系统集合 </h3>
+                <!-- <li>
+                    <h4>小型系统集合 </h4>
                     <p>
                         <b>第一</b>，以第一届创业小组开发了第一个以springMvc为核心的人力管理系统，我负责框架的搭建及工作流开发，
 						进一步承担某市立医院的ICU系统开发，主要工作以锐浪报表来呈现出病人病史、医疗状况、恢复情况，并以病历模板形式给出治疗建议。
@@ -239,18 +242,13 @@
                         实现对婚纱的纵向管理即生命周期管理，横向管理即用户对婚纱的体验；
                         <b>第三</b>，推出以SSM框架，Mysql数据库为支撑的校内论坛式APP（注册人数200+）进行线上阅览，线下交易。
                     </p>
-                </li> 
+                </li>
+				-->
             </ul>
         </div>
-        <div class="aboutme info-unit right-paragraph">
-		    <!--    <div class="code info-unit">
-            <h2 class="info-header"><i class="iconfont icon-flower"></i> <span class="info-title">自我评价</span></h2>
-            <hr>
-            <p>
-                 <b>注重动手能力，理论联系实践，兴趣驱使技术 </b>。本科第一届创业小组组长，后从事后端开发类工作，再到神经网络研究，具有技术文档阅读能力
-                、面向对象开发思想和良好的代码规范，期间活跃在社区以寻找辅助当前场景的解决方案，遵循以人为本的敏捷开发。
-            </p>
-               <div class="VX">
+    <div class="aboutme info-unit right-paragraph">
+		<div class="code info-unit">
+            <!--   <div class="VX">
                 <img src="static/image/weixin.png" alt="">
 
             </div> -->
