@@ -29,6 +29,9 @@ span {
     display: inline-block;
 }
 
+@page {
+size: A4;
+}
 
 .label-value{
     width: 200px;
