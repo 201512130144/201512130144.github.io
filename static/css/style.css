@@ -219,7 +219,8 @@ progress::-moz-progress-value {
     margin: 0 auto;
 
     width: 1050px;
-    height: 1525px;
+	/* yzx 调好的参数 */
+    height: 1528px;  
     background-color: white;
 
 }
