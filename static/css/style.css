@@ -29,6 +29,10 @@ span {
     display: inline-block;
 }
 
+@page {
+size: A4;
+}
+
 .label-value{
     width: 200px;
     vertical-align: top;
@@ -234,7 +238,7 @@ progress::-moz-progress-value {
     position: relative;;
     margin-left: 350px;
     min-height: 100%;
-    padding: 20px;
+    padding: 30px;
 
 }
 
