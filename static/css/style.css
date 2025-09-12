@@ -92,7 +92,7 @@ b{
 }
 
 .right-list li {
-    margin-bottom: 12px;
+    margin-bottom: 11px;
 }
 
 
@@ -219,7 +219,7 @@ progress::-moz-progress-value {
     margin: 0 auto;
 
     width: 1050px;
-    height: 1550px;
+    height: 1500px;
     background-color: white;
 
 }
@@ -227,10 +227,12 @@ progress::-moz-progress-value {
 .side {
     position: absolute;
     width: 350px;
-    height: 100%;
+    min-height: 100%;
     background-color: whitesmoke;
     padding-left: 15px;
-    padding-right: 15px;
+    padding-right: 10px;
+	z-index: 100;
+    overflow-y: hidden;
 }
 
 .main {
@@ -238,7 +240,7 @@ progress::-moz-progress-value {
     position: relative;;
     margin-left: 350px;
     min-height: 100%;
-    padding: 30px;
+    padding: 25px;
 
 }
 
@@ -306,5 +308,4 @@ ul li{
     cursor: pointer;
     
 }
-
 

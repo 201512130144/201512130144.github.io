@@ -24,8 +24,8 @@
 			<button data-remodal-action="confirm" class="remodal-confirm">确定</button>
 		</div>
 
-		<b><h1 id="persona-tag">意向职位：AI研发</h1>
-		<h2 id="username">仪志鑫</h2></b>
+		<b><h1 id="persona-tag" style="font-weight: bold;">意向职位：AI研发</h1>
+		<h2 id="username" style="font-weight: bold;">仪志鑫</h2></b>
 	</div>
 	<div class="profile info-unit">
             <h2 class="info-header"><i class="iconfont icon-person"></i> <span class="info-title">基本信息</span></h2>
@@ -37,9 +37,16 @@
 				 <li>
                     <label class="left-label">年龄</label><span class="label-value">28</span></li>
                 <li>
-                    <label class="left-label">研究生</label><span class="label-value">2023.09-至今</span></li>
+                    <label class="left-label">研究生</label><span class="label-value" style="font-weight: bold;">2023.09-至今</span></li>
                 <li>
                     <label class="left-label">院校</label><span class="label-value">哈尔滨理工大学</span></li>
+                <li>
+                    <label class="left-label">专业</label><span class="label-value" style="font-weight: bold;">计算机科学与技术</span></li>
+				<li>
+                    <label class="left-label">工作时间</label><span class="label-value" style="font-weight: bold;">2018.03-2023.08</span></li>
+				<li><label class="left-label">本科</label><span class="label-value" style="font-weight: bold;">2015.09-2019.06</span></li>
+                <li>
+                    <label class="left-label">院校</label><span class="label-value">枣庄学院</span></li>
                 <li>
                     <label class="left-label">专业</label><span class="label-value" style="font-weight: bold;">计算机科学与技术</span></li>
             </ul>
@@ -145,7 +152,7 @@
                     <h3>相关能力</h3>
                     <p>
                         <b>熟悉数据结构与复杂度分析，掌握段页式内存管理及页面置换策略，具备线程池/连接池优化经验，理解程序语言的解释与编译过程，
-						熟悉TCP/UDP,Get/Post,JWT、Protobuf、JsonB等，
+						熟悉TCP/UDP，Get/Post，JWT、Protobuf、JsonB等，
 						熟悉常用设计模式、自定义注解、旁路缓存、SQL优化与事务隔离级别，
 						熟悉DB、MQ、Pytorch/Spring、JS/CSS，
 						熟练SDK（开发、调试），常用Cli（如Linux/Docker/Git/Nodejs/RESTful API)</b>
@@ -164,20 +171,20 @@
         <div class="work info-unit right-list">
             <h2 class="info-header"><i class="iconfont icon-work"></i> <span class="info-title">成果</span></h2>
             <hr>
-            <ul class="experience-list">
-			    <li>
+            <ul class="post-list">
+			    <li style="margin-top: -4px;">
                     <h4><b>软著（2024SR0954862，声纹欺诈识别系统V1.0）</b></h4>
                     <p>
 					<b>目的在于开发一种声纹欺诈检测与身份识别系统以有效提升识别准确率与系统安全性。</b>
                     </p>
                 </li>
-                <li>
+                <li style="margin-top: -4px;">
                     <h4><b>专利（CN118782049A，实审中）</b></h4>
                     <p>
 					<b>目的在于设计一种基于时序的深层特征注意力方法以消除数字信号引起的特征模糊。</b>
                     </p>
                 </li>
-                <li>
+                <li style="margin-top: -4px;">
                     <h4>
                         <b>论文（
                         <a href="https://github.com/splab-HRBUST/TR-CNN" style="color:green;" target="_blank">
@@ -196,7 +203,7 @@
         <div class="project info-unit right-list">
             <h2 class="info-header"><i class="iconfont icon-project"></i> <span class="info-title">项目经历</span></h2>
             <hr>
-            <ul class="experience-list">
+            <ul class="project-list">
 			    <li>
                     <h4><b>Agent/工作流/Chat - Dify二次开发</b></h4>
                     <p>
@@ -208,9 +215,8 @@
 					构建<b>NIO+TCP长连接</b>的高性能网关，</>减少<b>35%</b>连接建立开销，采用<b>流式输出在线对话与实时推理</b>。
 					设计Python注解+SQLAlchemy事件<b>钩子处理自定义的业务规则校验</b>，满足不同场景下的灵活存储（<b>CP</b>）。
 					在<b>说话人识别任务上</b>，采用模型优化（<b>ETL、SFT、RLHF、损失</b>），准确率<b>相对提升18%</b>。
-					引入安全体系（JWT、签名校验），并采用Nginx反向代理、RabbitMQ的优先队列和Redis的Pub/Sub实现任务状态与事件广播
+					引入安全体系（JWT、签名校验），并采用Nginx反向代理、RabbitMQ的优先队列和Redis的Pub/Sub实现任务状态与事件广播来
 					<b>稳定支撑千级QPS每日调用量的API服务</b>，提供<b>毫秒级交互体验</b>。
-					
 					</p>
                 </li>
                 <li>
@@ -246,14 +252,15 @@
 				-->
             </ul>
         </div>
-    <div class="aboutme info-unit right-paragraph">
+    <!-- <div class="aboutme info-unit right-paragraph">
 		<div class="code info-unit">
-            <!--   <div class="VX">
+               <div class="VX">
                 <img src="static/image/weixin.png" alt="">
 
-            </div> -->
+            </div> 
         </div>
-        </div>
+        </div> -->
+		
     </div>
 </div>
 </body>
