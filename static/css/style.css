@@ -29,9 +29,6 @@ span {
     display: inline-block;
 }
 
-@page {
-size: A4;
-}
 
 .label-value{
     width: 200px;
@@ -74,10 +71,10 @@ b{
     margin-left: 200px;
 }
 
-.info-list, .progress-list{
+.info-list, .progress-list, .stack-list, .info-list, .comment-list{
     list-style: none;
     padding-left: 0px;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 2;
 }
 
@@ -219,7 +216,7 @@ progress::-moz-progress-value {
     margin: 0 auto;
 
     width: 1050px;
-    height: 1500px;
+    height: 1530px;
     background-color: white;
 
 }
