@@ -63,6 +63,7 @@ h1, h2, h3, h4, h5 {
 p{
     text-indent: 2em;
     font-size: 14px;
+   text-align: justify;
 }
 
 b{
@@ -219,7 +220,10 @@ progress::-moz-progress-value {
     margin: 0 auto;
 
     width: 1050px;
-	/* yzx 调好的参数 */
+	/* yzx 调好的参数 
+	width: 1050px;
+	height: 1528px;  
+	*/
     height: 1528px;  
     background-color: white;
 
@@ -250,6 +254,7 @@ progress::-moz-progress-value {
   justify-content: space-between; /* 左右分布 */
   align-items: baseline;          /* 保持基线对齐，不会太突兀 */
   margin-bottom: 10px;
+  
 }
 
 .info-header:hover {
