@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工作经历 - 专业简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 30px;
+        }
+        
+        .resume-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 80px;
+            height: 2px;
+            background: #e74c3c;
+        }
+        
+        .experience-item {
+            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .experience-item:last-child {
+            border-bottom: none;
+        }
+        
+        .company-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .company-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .job-title {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .time-period {
+            background: #3498db;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .responsibility {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 3px solid #3498db;
+            margin-bottom: 15px;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .responsibility-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .responsibility-title::before {
+            content: '▸';
+            margin-right: 8px;
+            color: #3498db;
+        }
+        
+        .responsibility-content {
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .project {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .project:hover {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .project-title::before {
+            content: '★';
+            margin-right: 8px;
+            color: #e74c3c;
+        }
+        
+        .project-description {
+            color: #666;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .tech-tag {
+            background: #ecf0f1;
+            color: #34495e;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .resume-container {
+                padding: 20px;
+            }
+            
+            .company-line {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .time-period {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <h2 class="section-title">工作经历</h2>
+        
+        <!-- 工作经历1 -->
+        <div class="experience-item">
+            <div class="company-line">
+                <div>
+                    <span class="company-name">阿里巴巴集团</span>
+                    <span class="job-title"> - 高级后端工程师</span>
+                </div>
+                <span class="time-period">2020年3月 - 至今</span>
+            </div>
+            
+            <div class="responsibility">
+                <div class="responsibility-title">主要职责</div>
+                <div class="responsibility-content">
+                    负责电商平台核心交易系统架构设计与开发，主导高并发场景下的系统优化，
+                    设计并实施微服务架构改造，提升系统可扩展性和稳定性。带领5人技术团队，
+                    完成多个关键模块的重构与性能提升。
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">分布式订单处理系统</div>
+                <div class="project-description">
+                    设计并开发了基于微服务架构的订单处理系统，采用事件驱动模式实现订单状态的实时同步。
+                    系统日均处理订单量超过100万，峰值QPS达到5000，通过分库分表和读写分离策略，
+                    将数据库压力降低60%，系统可用性达到99.99%。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Spring Cloud</span>
+                    <span class="tech-tag">MySQL</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">RabbitMQ</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">智能风控系统</div>
+                <div class="project-description">
+                    构建了基于机器学习的实时风控系统，通过分析用户行为数据识别欺诈交易。
+                    系统集成多种数据源，实现毫秒级风险判断，准确率达到95%以上，
+                    每年为公司减少经济损失超过千万元。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">Kafka</span>
+                    <span class="tech-tag">Elasticsearch</span>
+                    <span class="tech-tag">Flask</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工作经历2 -->
+        <div class="experience-item">
+            <div class="company-line">
+                <div>
+                    <span class="company-name">腾讯科技</span>
+                    <span class="job-title"> - 后端开发工程师</span>
+                </div>
+                <span class="time-period">2017年7月 - 2020年2月</span>
+            </div>
+            
+            <div class="responsibility">
+                <div class="responsibility-title">主要职责</div>
+                <div class="responsibility-content">
+                    参与社交平台核心功能开发与维护，负责用户关系链、消息推送等模块的设计与实现。
+                    优化数据库查询性能，参与系统架构演进，保障系统在高并发场景下的稳定性。
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">即时通讯系统优化</div>
+                <div class="project-description">
+                    对现有即时通讯系统进行架构优化，引入分布式缓存和消息队列，
+                    将单机承载用户数从5万提升到20万。设计并实现了消息可靠投递机制，
+                    确保消息送达率超过99.9%，显著提升用户体验。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Netty</span>
+                    <span class="tech-tag">Redis</span>
+                    <span class="tech-tag">Zookeeper</span>
+                    <span class="tech-tag">MySQL</span>
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">用户画像系统</div>
+                <div class="project-description">
+                    参与设计并开发了用户画像系统，整合多维度用户数据，构建完整的用户标签体系。
+                    系统为精准推荐和广告投放提供数据支持，帮助业务部门提升用户粘性和转化率。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Hadoop</span>
+                    <span class="tech-tag">Spark</span>
+                    <span class="tech-tag">HBase</span>
+                    <span class="tech-tag">Java</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 工作经历3 -->
+        <div class="experience-item">
+            <div class="company-line">
+                <div>
+                    <span class="company-name">字节跳动</span>
+                    <span class="job-title"> - 软件开发工程师（实习）</span>
+                </div>
+                <span class="time-period">2016年6月 - 2017年6月</span>
+            </div>
+            
+            <div class="responsibility">
+                <div class="responsibility-title">主要职责</div>
+                <div class="responsibility-content">
+                    参与内容推荐系统相关模块的开发，负责数据采集、清洗和预处理工作。
+                    协助团队完成系统性能监控和日志分析，参与代码审查和技术文档编写。
+                </div>
+            </div>
+            
+            <div class="project">
+                <div class="project-title">内容数据管道</div>
+                <div class="project-description">
+                    设计和实现了内容数据采集与处理管道，每日处理TB级别的用户行为数据。
+                    通过优化数据清洗算法，将数据处理效率提升40%，为推荐算法提供高质量数据输入。
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Kafka</span>
+                    <span class="tech-tag">Spark</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
