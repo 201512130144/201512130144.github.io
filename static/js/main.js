@@ -19,18 +19,22 @@ let currentFireworks = document.createElement("canvas");
 let currentObject = currentFireworks.getContext("2d");
 let fireworksObject = fireworksCanvas.getContext("2d");
 
-//currentFireworks.width = fireworksCanvas.width = window.innerWidth;
-//currentFireworks.height = fireworksCanvas.height = window.innerHeight;
+
+
 let dpr = window.devicePixelRatio || 1;
 
-currentFireworks.width = fireworksCanvas.width = window.innerWidth * dpr;
-currentFireworks.height = fireworksCanvas.height = window.innerHeight * dpr;
-
+fireworksCanvas.width = window.innerWidth * dpr;
+fireworksCanvas.height = window.innerHeight * dpr;
 fireworksCanvas.style.width = window.innerWidth + "px";
 fireworksCanvas.style.height = window.innerHeight + "px";
-
-currentObject.scale(dpr, dpr);
 fireworksObject.scale(dpr, dpr);
+
+currentFireworks.width = window.innerWidth * dpr;
+currentFireworks.height = window.innerHeight * dpr;
+currentFireworks.style.width = window.innerWidth + "px";
+currentFireworks.style.height = window.innerHeight + "px";
+currentObject.scale(dpr, dpr);
+
 
 let fireworksExplosion = [];
 let autoPlayFlag = false;
@@ -66,32 +70,36 @@ let lastTime;
 // 烟花动画效果
 function animationEffect() {
     fireworksObject.save();
-    fireworksObject.fillStyle = "rgba(0,5,55,0.04)";
+
+let fade = 0.03 + Math.sin(Date.now() * 0.001) * 0.02;
+fireworksObject.fillStyle = `rgba(0,0,0,${fade})`;
+
+
+
     //fireworksObject.fillRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
 	fireworksObject.fillRect(0, 0, window.innerWidth, window.innerHeight);
     fireworksObject.restore();
     let newTime = new Date();
-    if (newTime - lastTime > getRandom(10,1500) + (window.innerHeight - 767) / 2) {
+    if (newTime - lastTime > getRandom(20,1500) + (window.innerHeight - 767) / 2) {
         let random = Math.random() * 100 > 15;
-        let x = getRandom(0, (fireworksCanvas.width));
-        let y = getRandom(0, window.innerHeight * 0.3);
+		let x = getRandom(0, window.innerWidth);
+		let y = getRandom(0, window.innerHeight * 0.3);
+
         if (random) {
             let bigExplode = new explode(
-                getRandom(0, fireworksCanvas.width),
-                getRandom(1, 3),
-                "#FFF",
-                {
-                    x: x,
-                    y: y,
-                }
-            );
+			getRandom(0, window.innerWidth),
+			getRandom(1, 3),
+			"#FFF",
+			{ x: x, y: y }
+		);
+
             fireworksExplosion.push(bigExplode);
 
         } else {
-            let x = getRandom(fireworksCanvas.width/2-300, fireworksCanvas.width/2+300);
+            let x = getRandom(window.innerWidth/2-300, window.innerWidth/2+300);
             let y = getRandom(0, 350);
             let bigExplode = new explode(
-                getRandom(0, fireworksCanvas.width),
+                getRandom(0, window.innerWidth),
                 getRandom(1, 3),
                 "#FFF",
                 {
@@ -140,29 +148,37 @@ Array.prototype.foreach = function (callback) {
 fireworksCanvas.onclick = function (evt) {
     let x = evt.clientX;
     let y = evt.clientY;
-    let explode = new explode(
-        getRandom(fireworksCanvas.width / 3, (fireworksCanvas.width * 2) / 3),
+
+    let explodeObj = new explode(
+        getRandom(window.innerWidth / 3, (window.innerWidth * 2) / 3),
         2,
         "#FFF",
-        {
-            x: x,
-            y: y,
-        }
+        { x: x, y: y }
     );
-    fireworksExplosion.push(explode);
+
+    fireworksExplosion.push(explodeObj);
 };
+
 
 let explode = function (x, r, c, explodeArea, shape) {
     this.explodes = [];
     this.x = x;
-    this.y = fireworksCanvas.height + r;
+    this.y = window.innerHeight + r;
     this.r = r;
     this.c = c;
     this.shape = shape || false;
     this.explodeArea = explodeArea;
     this.dead = false;
     this.ba = parseInt(getRandom(80, 200));
+
+    // 新增物理参数
+    this.vx = (explodeArea.x - this.x) / 60;
+    this.vy = (explodeArea.y - this.y) / 60;
+    this.ay = 0.03;   // 重力
 };
+
+
+
 explode.prototype = {
     _paint: function () {
         fireworksObject.save();
@@ -174,65 +190,109 @@ explode.prototype = {
     },
 	//火箭移动速度
     _move: function () {
-        let dx = this.explodeArea.x - this.x,
-            dy = this.explodeArea.y - this.y;
-        this.x = this.x + dx * 0.04;
-        this.y = this.y + dy * 0.04;
-        if (Math.abs(dx) <= this.ba && Math.abs(dy) <= this.ba) {
-            if (this.shape) {
-                this._shapeExplode();
-            } else {
-                this._explode();
-            }
-            this.dead = true;
+
+    this.vy += this.ay;
+    this.x += this.vx;
+    this.y += this.vy;
+
+    let dx = this.explodeArea.x - this.x;
+    let dy = this.explodeArea.y - this.y;
+
+    let distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < 60) {
+		this.x = this.explodeArea.x;
+		this.y = this.explodeArea.y;
+		
+        if (this.shape) {
+            this._shapeExplode();
         } else {
-            this._paint();
+            this._explode();
         }
-    },
+        this.dead = true;
+        return;
+    }
+
+    this._paint();
+	},
     _drawLight: function () {
         fireworksObject.save();
-        fireworksObject.fillStyle = "rgba(255,228,150,0.3)";
+
+
+		fireworksObject.globalCompositeOperation = "lighter";
+		fireworksObject.fillStyle = "rgba(255,255,255,0.15)";
+
         fireworksObject.beginPath();
         fireworksObject.arc(this.x, this.y, this.r + 2 * Math.random() + 1, 0, 2 * Math.PI);
         fireworksObject.fill();
         fireworksObject.restore();
     },
-    _explode: function () {
-        //let embellishmentNum = getRandom(150, 400);
-		let embellishmentNum = getRandom(300, 600);
-        let style = getRandom(0, 10) >= 5 ? 1 : 2;
-        let color;
-        if (style === 1) {
-            color = {
-                a: parseInt(getRandom(128, 255)),
-                b: parseInt(getRandom(128, 255)),
-                c: parseInt(getRandom(128, 255)),
-            };
-        }
-        let fullRange = parseInt(getRandom(900, 1300));
-        for (let i = 0; i < embellishmentNum; i++) {
-            if (style === 2) {
-                color = {
-                    a: parseInt(getRandom(128, 255)),
-                    b: parseInt(getRandom(128, 255)),
-                    c: parseInt(getRandom(128, 255)),
-                };
-            }
-            let a = getRandom(-Math.PI, Math.PI);
-            let x = getRandom(0, fullRange) * Math.cos(a) + this.x;
-            let y = getRandom(0, fullRange) * Math.sin(a) + this.y;
-			// 烟花的颗粒大小 yzx
-            let radius = getRandom(1, 3.5);
-            let embellishment = new newEmbellishment(this.x, this.y, radius, color, x, y);
-            this.explodes.push(embellishment);
-        }
-    },
+_explode: function () {
+
+    let embellishmentNum = getRandom(300, 600);
+
+    // ===== 20种精选高级配色 =====
+    const colorPalette = [
+
+        { a: 80,  b: 180, c: 255 },  // 冰蓝
+        { a: 120, b: 200, c: 255 },  // 天蓝
+        { a: 50,  b: 220, c: 200 },  // 青色
+        { a: 0,   b: 255, c: 200 },  // 湖绿
+        { a: 255, b: 200, c: 80  },  // 金色
+        { a: 255, b: 170, c: 60  },  // 暖橙
+        { a: 255, b: 120, c: 60  },  // 烈焰橙
+        { a: 255, b: 90,  c: 90  },  // 红焰
+        { a: 255, b: 255, c: 255 },  // 纯白
+        { a: 240, b: 240, c: 255 },  // 冷白
+        { a: 200, b: 200, c: 255 },  // 银蓝
+        { a: 180, b: 120, c: 255 },  // 紫蓝
+        { a: 150, b: 80,  c: 255 },  // 深紫
+        { a: 255, b: 100, c: 200 },  // 玫红
+        { a: 255, b: 150, c: 220 },  // 粉紫
+        { a: 120, b: 255, c: 150 },  // 嫩绿
+        { a: 180, b: 255, c: 100 },  // 荧光绿
+        { a: 255, b: 255, c: 120 },  // 柔黄
+        { a: 255, b: 220, c: 180 },  // 香槟
+        { a: 100, b: 255, c: 255 }   // 电光青
+    ];
+
+    // 随机选择一种颜色
+    let color = colorPalette[
+        Math.floor(Math.random() * colorPalette.length)
+    ];
+
+    let fullRange = parseInt(getRandom(600, 1800));
+
+    for (let i = 0; i < embellishmentNum; i++) {
+
+        let angle = getRandom(0, Math.PI * 2);
+        let r = getRandom(0, fullRange);
+
+        let x = r * Math.cos(angle) + this.x;
+        let y = r * Math.sin(angle) + this.y;
+
+        let radius = getRandom(2, 3);
+
+        let embellishment = new newEmbellishment(
+            this.x,
+            this.y,
+            radius,
+            color,
+            x,
+            y
+        );
+
+        this.explodes.push(embellishment);
+    }
+},
+
     _shapeExplode: function () {
         let that = this;
 		//YZX 渐变效果
-        putValue(currentFireworks, currentObject, this.shape, 7, function (dots) {
-            let dx = fireworksCanvas.width / 2 - that.x;
-            let dy = fireworksCanvas.height / 2 - that.y;
+        putValue(currentFireworks, currentObject, this.shape, 5, function (dots) {
+			let dx = window.innerWidth / 2 - that.x;
+			let dy = window.innerHeight / 2 - that.y;
+
             let color;
             for (let i = 0; i < dots.length; i++) {
                 color = {
@@ -251,49 +311,68 @@ explode.prototype = {
 };
 
 function putValue(fireworks, context, ele, dr, callback) {
-    context.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+    // 先清空
+	context.clearRect(0, 0, currentFireworks.width, currentFireworks.height);
+
+
     let img = new Image();
     let dots;
+
     if (ele.innerHTML.indexOf("img") >= 0) {
+
         img.src = ele.getElementsByTagName("img")[0].src;
+
         implode(img, function () {
+
             context.drawImage(
                 img,
-                fireworksCanvas.width / 2 - img.width / 2,
-                fireworksCanvas.height / 2 - img.width / 2
+                window.innerWidth / 2 - img.width / 2,
+                window.innerHeight / 2 - img.height / 2
             );
-            let dots = gettingData(fireworks, context, dr);
+
+            dots = gettingData(fireworks, context, dr);
             callback(dots);
         });
+
     } else {
+
         let text = ele.innerHTML;
+
         context.save();
-		//YZX 字体大小
-		let fontSize = Math.floor(window.innerWidth / 12);
-		context.font = "bold " + fontSize + "px 宋体";
-		context.imageSmoothingEnabled = true;
-		context.imageSmoothingQuality = "high";
+
+        let fontSize = Math.floor(window.innerWidth / 10);
+
+
+		context.font = "bold " + fontSize + "px Arial, Microsoft YaHei, sans-serif";
+
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillStyle =
-            "rgba(" +
-            parseInt(getRandom(1, 85)) +
-            "," +
-            parseInt(getRandom(85, 170)) +
-            "," +
-            parseInt(getRandom(170, 255)) +
-            " , 1)";
-        //context.fillText(text, fireworksCanvas.width / 2, fireworksCanvas.height / 2);
-		context.fillText(text, window.innerWidth / 2, window.innerHeight / 2);
-		context.lineWidth = 2;
-		context.strokeStyle = "#ffffff";
-		context.strokeText(text, window.innerWidth / 2, window.innerHeight / 2);
+
+        // 固定高亮色，避免随机黑色消失
+        context.fillStyle = "rgba(255,255,255,1)";
+
+        context.fillText(
+            text,
+            window.innerWidth / 2,
+            window.innerHeight / 2
+        );
+
+        context.lineWidth = 2;
+        context.strokeStyle = "rgba(120,200,255,1)";
+
+        context.strokeText(
+            text,
+            window.innerWidth / 2,
+            window.innerHeight / 2
+        );
 
         context.restore();
+
         dots = gettingData(fireworks, context, dr);
         callback(dots);
     }
 }
+
 
 function implode(img, callback) {
     if (img.complete) {
@@ -306,26 +385,41 @@ function implode(img, callback) {
 }
 
 function gettingData(fireworks, context, dr) {
-    let imgData = context.getImageData(0, 0, fireworksCanvas.width, fireworksCanvas.height);
-    context.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+    let imgData = context.getImageData(
+        0,
+        0,
+        currentFireworks.width,
+        currentFireworks.height
+    );
+
+    context.clearRect(
+        0,
+        0,
+        currentFireworks.width,
+        currentFireworks.height
+    );
+
     let dots = [];
+
     for (let x = 0; x < imgData.width; x += dr) {
         for (let y = 0; y < imgData.height; y += dr) {
             let i = (y * imgData.width + x) * 4;
-            if (imgData.data[i + 3] > 128) {
-                let dot = {
-                    x: x,
-                    y: y,
+
+            if (imgData.data[i + 3] > 0) {
+                dots.push({
+                    x: x / dpr,
+                    y: y / dpr,
                     a: imgData.data[i],
                     b: imgData.data[i + 1],
                     c: imgData.data[i + 2],
-                };
-                dots.push(dot);
+                });
             }
         }
     }
+
     return dots;
 }
+
 
 function getRandom(a, b) {
     return Math.random() * (b - a) + a;
@@ -344,13 +438,11 @@ function drawFireworks() {
 
 // 新建星火位置
 let newSpark = function () {
-    this.x = Math.random() * fireworksCanvas.width;
-
-    this.y = Math.random() * 2 * fireworksCanvas.height - fireworksCanvas.height;
-
+    this.x = Math.random() * window.innerWidth;
+    this.y = Math.random() * 2 * window.innerHeight - window.innerHeight;
     this.r = Math.random() * maxRadius;
-
 };
+
 
 newSpark.prototype = {
     paint: function () {
@@ -364,14 +456,36 @@ newSpark.prototype = {
 };
 // 烟花点缀生成
 let newEmbellishment = function (centerX, centerY, radius, color, tx, ty) {
-    this.tx = tx;
-    this.ty = ty;
+
     this.x = centerX;
     this.y = centerY;
+
+    let dx = tx - centerX;
+    let dy = ty - centerY;
+
+    // 计算距离
+    let distance = Math.sqrt(dx * dx + dy * dy) + 60;
+
+    // 固定飞行时间（帧数）
+    let duration = 60;
+
+    // 让粒子在 duration 帧内到达目标
+    this.vx = dx / duration;
+    this.vy = dy / duration;
+
+    // 不要重力
+    this.ay = 0.2;
+
+    this.life = duration;
     this.dead = false;
-    this.radius = radius;
+
+    this.radius = radius || 1;
     this.color = color;
 };
+
+
+
+
 newEmbellishment.prototype = {
     paint: function () {
         fireworksObject.save();
@@ -382,15 +496,30 @@ newEmbellishment.prototype = {
         fireworksObject.fill();
         fireworksObject.restore();
     },
-    moveTo: function () {
-        this.ty = this.ty + 0.3;
-        let dx = this.tx - this.x,
-            dy = this.ty - this.y;
-        this.x = Math.abs(dx) < 0.1 ? this.tx : this.x + dx * 0.1;
-        this.y = Math.abs(dy) < 0.1 ? this.ty : this.y + dy * 0.1;
-        if (dx === 0 && Math.abs(dy) <= 80) {
-            this.dead = true;
-        }
-        this.paint();
-    },
+	moveTo: function () {
+
+    this.vy += this.ay / 3;   // 重力拉弯
+    this.x += this.vx;
+    this.y += this.vy;
+
+    this.life--;
+    this.alpha = this.life / 40;
+
+    if (this.life <= 10) {
+        this.dead = true;
+        return;
+    }
+
+    fireworksObject.save();
+    fireworksObject.globalAlpha = this.alpha;
+    fireworksObject.beginPath();
+    fireworksObject.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+    fireworksObject.fillStyle =
+        "rgba(" + this.color.a + "," + this.color.b + "," + this.color.c + ",1)";
+    fireworksObject.fill();
+    fireworksObject.restore();
+},
+
+
+
 };

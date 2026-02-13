@@ -1,7 +1,15 @@
 html,
+.wrapper {
+    transform: scale(0.6);
+    transform-origin: center  center;
+    width: 150%;   /* 关键：防止被裁剪 */
+    height: 150%;
+}
+
+
 body {
-    width: 100%;
-    height: 100%;
+    width: 150%;
+    height: 150%;
     margin: 0;
     padding: 0;
     background-color: #161929;
@@ -21,9 +29,9 @@ audio {
     display: flex;
     align-items: center;
     width: 160px;
-    background-color: rgba(0, 0, 0, 0.52);
+    background-color: rgba(0, 0, 0, 0.82);
     padding: 0px 17px;
-    top: 25px;
+    top: 40px;
     border-radius: 6px;
     overflow: hidden;
     z-index: 1000;
@@ -33,7 +41,7 @@ audio {
 /* 消息提示框内容样式 */
 .message p {
     line-height: 1;
-    font-size:14px;
+    font-size:5px;
     color: #ffffff;
 }
 
