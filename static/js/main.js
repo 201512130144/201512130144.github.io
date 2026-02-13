@@ -21,12 +21,12 @@ let fireworksObject = fireworksCanvas.getContext("2d");
 
 
 
-let dpr = window.devicePixelRatio || 1;
+let dpr = window.devicePixelRatio || 8;
 
 fireworksCanvas.width = window.innerWidth * dpr;
 fireworksCanvas.height = window.innerHeight * dpr;
-fireworksCanvas.style.width = window.innerWidth + "px";
-fireworksCanvas.style.height = window.innerHeight + "px";
+fireworksCanvas.style.width = window.innerWidth / 2 + "px";
+fireworksCanvas.style.height = window.innerHeight  / 2 + "px";
 fireworksObject.scale(dpr, dpr);
 
 currentFireworks.width = window.innerWidth * dpr;
@@ -52,16 +52,20 @@ window.onload = function () {
             autoPlayFlag = true;
         }
     }
-    for (let i = 0; i <= 10; i++){
-        setTimeout(function () {
-            document.querySelector("body > div.message").style.opacity = i/10;
-        },i*60+2000)
-    };
-    for (let i = 0; i <= 10; i++){
-        setTimeout(function () {
-            document.querySelector("body > div.message").style.opacity = 1 - i/10;
-        },i*60+8000)
-    };
+		// 淡入
+		for (let i = 0; i <= 10; i++){
+			setTimeout(function () {
+				document.querySelector("body > div.message").style.opacity = i/10;
+			}, i*120 + 2000)
+		};
+
+		// 淡出
+		for (let i = 0; i <= 10; i++){
+			setTimeout(function () {
+				document.querySelector("body > div.message").style.opacity = 1 - i/10;
+			}, i*120 + 8000)
+		};
+
 };
 
 let lastTime;
@@ -71,7 +75,7 @@ let lastTime;
 function animationEffect() {
     fireworksObject.save();
 
-let fade = 0.03 + Math.sin(Date.now() * 0.001) * 0.02;
+let fade = 0.03 + Math.sin(Date.now() * 0.001) * 0.04;
 fireworksObject.fillStyle = `rgba(0,0,0,${fade})`;
 
 
@@ -80,7 +84,7 @@ fireworksObject.fillStyle = `rgba(0,0,0,${fade})`;
 	fireworksObject.fillRect(0, 0, window.innerWidth, window.innerHeight);
     fireworksObject.restore();
     let newTime = new Date();
-    if (newTime - lastTime > getRandom(20,1500) + (window.innerHeight - 767) / 2) {
+    if (newTime - lastTime > getRandom(50,1500)) {
         let random = Math.random() * 100 > 15;
 		let x = getRandom(0, window.innerWidth);
 		let y = getRandom(0, window.innerHeight * 0.3);
@@ -96,7 +100,7 @@ fireworksObject.fillStyle = `rgba(0,0,0,${fade})`;
             fireworksExplosion.push(bigExplode);
 
         } else {
-            let x = getRandom(window.innerWidth/2-300, window.innerWidth/2+300);
+            let x = getRandom(window.innerWidth/2 - 300, window.innerWidth/2 - 200);
             let y = getRandom(0, 350);
             let bigExplode = new explode(
                 getRandom(0, window.innerWidth),
@@ -134,7 +138,7 @@ fireworksObject.fillStyle = `rgba(0,0,0,${fade})`;
             });
         }
     });
-    setTimeout(animationEffect, 16);
+    setTimeout(animationEffect, 18);
 }
 
 Array.prototype.foreach = function (callback) {
@@ -200,7 +204,7 @@ explode.prototype = {
 
     let distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance < 60) {
+    if (distance < 40) {
 		this.x = this.explodeArea.x;
 		this.y = this.explodeArea.y;
 		
@@ -289,7 +293,7 @@ _explode: function () {
     _shapeExplode: function () {
         let that = this;
 		//YZX 渐变效果
-        putValue(currentFireworks, currentObject, this.shape, 5, function (dots) {
+        putValue(currentFireworks, currentObject, this.shape, 4, function (dots) {
 			let dx = window.innerWidth / 2 - that.x;
 			let dy = window.innerHeight / 2 - that.y;
 

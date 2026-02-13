@@ -3,21 +3,11 @@ html, body {
     padding: 0;
     width: 100%;
     height: 100%;
-    background-color: #161929;
-    overflow: hidden;
-    user-select: none;
+    background-color: #161929;  /* 深色背景，突出烟花 */
+    overflow: hidden;           /* 禁止滚动条 */
+    user-select: none;          /* 禁止文字选中 */
 }
 
-.wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.6);
-    transform-origin: left top;
-
-    width: 150%;  /* 放大内容 */
-    height: 150%;
-}
 
 
 
